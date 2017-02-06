@@ -13,11 +13,10 @@ logger = logging.getLogger(__name__)
 user_location_db = {}
 
 #  Load 441 busstops into the memory
-stringdata = csv.reader(open('441.csv'))
-#stringdata = re.findall('(.*), (.*), (.*)',open('441.csv').read())
-data = [(l,float(x),float(y)) for l,x,y in stringdata]
+with open('441.csv') as csvfile:
+    readCSV = csv.reader(csvfile, delimiter=',')
+    data = [(row[0],float(row[1]),float(row[2])) for row in readCSV]
 
-print stringdata
 
 # Define a few command handlers. These usually take the two arguments bot and
 # update. Error handlers also receive the raised TelegramError object in error.
