@@ -18,11 +18,10 @@ for bus in jdata['Buses']:
     dest_lat = float(bus['Latitude'])
     dest_lng = float(bus['Longitude'])
 
-    orig_coord = orig_lat, orig_lng
-    dest_coord = dest_lat, dest_lng
-    print orig_coord
-    print dest_coord
-    url = "http://maps.googleapis.com/maps/api/distancematrix/json?origins={0}&destinations={1}&mode=driving&language=en-EN&sensor=false".format(str(orig_coord),str(dest_coord))
+    orig_coord = str(orig_lat) + "," +str(orig_lng)
+    dest_coord = str(dest_lat)+"," +str(dest_lng)
+    url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="+str(orig_coord)+"&destinations="+str(dest_coord)+"&mode=driving&key=AIzaSyBJz8a7fpvQ0-DPQa7aQvamU4wOlC6EKn0"
     result= simplejson.load(urllib.urlopen(url))
     print result
     driving_time = result['rows'][0]['elements'][0]['duration']['value']
+    print driving_time
