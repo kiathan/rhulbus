@@ -55,9 +55,7 @@ def when(bot, update):
         dest_coord = str(dest_lat)+"," +str(dest_lng)
         url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="+str(orig_coord)+"&destinations="+str(dest_coord)+"&mode=driving&key=AIzaSyBJz8a7fpvQ0-DPQa7aQvamU4wOlC6EKn0"
         result= simplejson.load(urllib.urlopen(url))
-        print result
         driving_time = result['rows'][0]['elements'][0]['duration']['value']
-        print driving_time
     update.message.reply_text('RHUL Bus Bot -\n /here -get location and select busstop \n /when to get the time the bus would arrive')
 
 def location(bot, update):
@@ -72,8 +70,6 @@ def location(bot, update):
     p = [user_location.latitude, user_location.longitude]
     sorteddata = sorted(data, key=lambda d: dist(p,d[1:]))
 
-    print data
-    print sorteddata
     keyboard = [
                 [InlineKeyboardButton(sorteddata[0][0], callback_data=sorteddata[0])],
                 [InlineKeyboardButton(sorteddata[1][0], callback_data=sorteddata[1])],
